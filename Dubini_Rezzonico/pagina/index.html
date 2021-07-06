@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Random random</title>
+
+	<style type="text/css">
+		body {
+			margin: 0;
+			background: black;
+			font-family: helvetica;
+		}
+		.contenitore {
+			width: 100vw;
+			height: 100vh;
+			overflow-x: scroll;
+			overflow-y: scroll;
+			font-family: helvetica;
+		}
+		.stelle{
+			width: 5000px;
+			height: 5000px;
+			color: white;
+			position: relative;
+			font-family: helvetica;
+			z-index: 100
+		}
+		.titolo {
+			position: absolute;
+			border-radius: 50%;
+			background-color: white;
+			width: 10px;
+			height: 10px;
+			cursor: pointer;
+			font-family: sans-serif;
+		}
+		.titolo span {
+			background-color: black;
+			display: none;
+			margin-left: 40px;
+			width:  200px; /* aggiungo la larghezza del div */
+			font-family: sans-serif;
+		}
+		.titolo:hover span {
+			background-color: black;
+			display: block;
+			font-family: helvetica;
+		}
+
+	</style>
+
+	<link rel="stylesheet" href="../home_page/style.css">
+</head>
+<body>
+
+	<div>
+		<div id='stars'></div>
+		<div id='stars2'></div>
+		<div id='stars3'></div>
+	</div>
+
+	<main class="contenitore">
+		<div class="stelle">
+
+		</div>
+	</main>
+
+	<script type="text/javascript">
+
+		fetch('res/elenco_filtrato.txt').then(e => {
+			return e.text()
+		}).then( e => {
+			let titoli = e.split('\n')
+
+			let target = document.querySelector('.stelle')
+			for (let i=0; i<titoli.length; i++) {
+				let div = document.createElement('div')
+				div.classList.add('titolo')
+				div.innerHTML = '<span>' + titoli[i] + '</span>'
+				target.appendChild(div)
+
+				div.style.left = Math.random() * 98 + '%'
+				div.style.top = Math.random() * 98 + '%'
+
+				let d = Math.random() * 13 + 7
+
+				div.style.width = d + 'px'
+				div.style.height = d + 'px'
+			}
+		})
+
+	</script>
+
+
+</body>
+</html>
